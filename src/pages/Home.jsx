@@ -11,7 +11,7 @@ const Home = () => {
     facebook: "",
     instagram: "",
     twitter: "",
-    image: null
+    image: null,
   });
 
   const [qrValue, setQrValue] = useState("");
@@ -48,7 +48,7 @@ const Home = () => {
     // Store all details except actual image in QR
     const profileData = {
       ...formData,
-      image: null // just a placeholder
+      image: null, // just a placeholder
     };
 
     // URL-safe Base64 encoding
@@ -80,15 +80,67 @@ const Home = () => {
           <div className="left-side">
             <h3>Enter Your Details</h3>
             <form className="main-form" onSubmit={handleSubmit}>
-              <input type="text" name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} required />
-              <input type="tel" name="contactNumber" placeholder="Contact Number" value={formData.contactNumber} onChange={handleChange} required />
-              <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
-              <input type="url" name="website" placeholder="Website Link" value={formData.website} onChange={handleChange} />
-              <input type="url" name="facebook" placeholder="Facebook Profile Link" value={formData.facebook} onChange={handleChange} />
-              <input type="url" name="instagram" placeholder="Instagram Profile Link" value={formData.instagram} onChange={handleChange} />
-              <input type="url" name="twitter" placeholder="Twitter Profile Link" value={formData.twitter} onChange={handleChange} />
-              <input type="file" name="image" accept="image/*" onChange={handleChange} />
-              <button className="btn" type="submit">Generate QR Code</button>
+              <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="tel"
+                name="contactNumber"
+                placeholder="Contact Number"
+                value={formData.contactNumber}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="url"
+                name="website"
+                placeholder="Website Link"
+                value={formData.website}
+                onChange={handleChange}
+              />
+              <input
+                type="url"
+                name="facebook"
+                placeholder="Facebook Profile Link"
+                value={formData.facebook}
+                onChange={handleChange}
+              />
+              <input
+                type="url"
+                name="instagram"
+                placeholder="Instagram Profile Link"
+                value={formData.instagram}
+                onChange={handleChange}
+              />
+              <input
+                type="url"
+                name="twitter"
+                placeholder="Twitter Profile Link"
+                value={formData.twitter}
+                onChange={handleChange}
+              />
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleChange}
+              />
+              <button className="btn" type="submit">
+                Generate QR Code
+              </button>
             </form>
           </div>
 
@@ -99,7 +151,9 @@ const Home = () => {
               <>
                 <QRCodeCanvas value={qrValue} size={200} includeMargin={true} />
                 <br />
-                <button className="btn" onClick={downloadQR}>Download QR Code</button>
+                <button className="btn" onClick={downloadQR}>
+                  Download QR Code
+                </button>
               </>
             ) : (
               <p>No QR code generated yet.</p>

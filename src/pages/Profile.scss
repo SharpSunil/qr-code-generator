@@ -1,0 +1,44 @@
+.profile-parent {
+  height: 100vh;
+  display: flex;
+  .profile-container {
+    display: flex;
+    // align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 370px;
+    background: white;
+    padding: 20px !important;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    max-height: fit-content;
+    gap:20px;
+    img {
+      border-radius: 50%;
+      background-size:contain;
+    
+    }
+     h1{
+        text-align: center;
+      }
+    p{
+        a{
+            color: var(--accent);
+            text-decoration: none;
+            transition:var(--trans);
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+  }
+  @media only screen and (max-width:500px){
+    .profile-container {
+      width: 90%;
+      gap:10px;
+      h1{
+        text-align: center;
+      }
+    }
+  }
+}

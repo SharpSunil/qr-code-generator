@@ -1,13 +1,12 @@
 import React from "react";
+import "./Profile.scss";
 
 const Profile = () => {
   const params = new URLSearchParams(window.location.search);
   const encodedData = params.get("data");
-
   if (!encodedData) {
     return <p>No profile data found.</p>;
   }
-
   let profile;
   try {
     const base64 = encodedData.replace(/-/g, "+").replace(/_/g, "/");
@@ -27,27 +26,55 @@ const Profile = () => {
   }
 
   return (
-    <div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
-      <h1>{profile.name}</h1>
-      {profile.image && (
-        <img
-          src={profile.image}
-          alt="Profile"
-          style={{
-            width: "200px",
-            height: "200px",
-            objectFit: "cover",
-            borderRadius: "10px",
-            marginBottom: "15px",
-          }}
-        />
-      )}
-      <p><strong>Contact:</strong> <a href={`tel:${profile.contactNumber}`}>{profile.contactNumber}</a></p>
-      <p><strong>Email:</strong> <a href={`mailto:${profile.email}`}>{profile.email}</a></p>
-      {profile.website && <p><strong>Website:</strong> <a href={profile.website} target="_blank" rel="noreferrer">{profile.website}</a></p>}
-      {profile.facebook && <p><strong>Facebook:</strong> <a href={profile.facebook} target="_blank" rel="noreferrer">{profile.facebook}</a></p>}
-      {profile.instagram && <p><strong>Instagram:</strong> <a href={profile.instagram} target="_blank" rel="noreferrer">{profile.instagram}</a></p>}
-      {profile.twitter && <p><strong>Twitter:</strong> <a href={profile.twitter} target="_blank" rel="noreferrer">{profile.twitter}</a></p>}
+    <div className="profile-parent parent">
+      <div className="profile-container container">
+        {profile.image && <img src={profile.image} alt="Profile" />}
+        <h1 className="profile-name">{profile.name}</h1>
+        <p>
+          <strong>Contact:</strong>{" "}
+          <a href={`tel:${profile.contactNumber}`}>{profile.contactNumber}</a>
+        </p>
+
+        <p>
+          <strong>Email:</strong>{" "}
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        </p>
+
+        {profile.website && (
+          <p>
+            <strong>Website:</strong>{" "}
+            <a href={profile.website} target="_blank" rel="noreferrer">
+              {profile.website}
+            </a>
+          </p>
+        )}
+
+        {profile.facebook && (
+          <p>
+            <strong>Facebook:</strong>{" "}
+            <a href={profile.facebook} target="_blank" rel="noreferrer">
+              {profile.facebook}
+            </a>
+          </p>
+        )}
+        {profile.instagram && (
+          <p>
+            <strong>Instagram:</strong>{" "}
+            <a href={profile.instagram} target="_blank" rel="noreferrer">
+              {profile.instagram}
+            </a>
+          </p>
+        )}
+
+        {profile.twitter && (
+          <p>
+            <strong>Twitter:</strong>{" "}
+            <a href={profile.twitter} target="_blank" rel="noreferrer">
+              {profile.twitter}
+            </a>
+          </p>
+        )}
+      </div>
     </div>
   );
 };
