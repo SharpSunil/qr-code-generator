@@ -47,12 +47,6 @@ Twitter: ${formData.twitter || "N/A"}
     a.click();
   };
 
-  const copyData = () => {
-    navigator.clipboard.writeText(qrValue).then(() => {
-      alert("Data copied to clipboard!");
-    });
-  };
-
   return (
     <div className="home-parent parent">
       <div className="home-container container">
@@ -125,29 +119,13 @@ Twitter: ${formData.twitter || "N/A"}
           <div className="right-side" ref={qrRef}>
             <h3>Preview and Download</h3>
             {qrValue ? (
-              <div style={{ position: "relative", display: "inline-block" }}>
+              <>
                 <QRCodeCanvas value={qrValue} size={200} includeMargin={true} />
-                
-                {/* Copy Button at top-right corner */}
-                <button
-                  onClick={copyData}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    right: 0,
-                    padding: "5px 10px",
-                    fontSize: "12px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Copy Data
-                </button>
-
                 <br />
-                <button className="btn" onClick={downloadQR} style={{ marginTop: "10px" }}>
+                <button className="btn" onClick={downloadQR}>
                   Download QR Code
                 </button>
-              </div>
+              </>
             ) : (
               <p>No QR code generated yet.</p>
             )}
