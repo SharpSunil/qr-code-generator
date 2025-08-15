@@ -10,25 +10,37 @@
       display: flex;
       gap: 20px;
       width: 100%;
-      border: 1px solid red;
       .left-side {
         width: 50%;
         display: flex;
-        border: 1px solid green;
         flex-direction: column;
-        background:white;
-        padding:20px;
-        border-radius: 10px;;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        .main-form {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            &:focus {
+              outline: none;
+              border: 1px solid blue;
+            }
+          }
+        }
       }
       .right-side {
         width: 50%;
         display: flex;
         border: 1px solid blue;
         flex-direction: column;
-        background:white;
-        padding:20px;
-        border-radius: 10px;;
-      } 
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+      }
     }
   }
 }

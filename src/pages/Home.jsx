@@ -26,8 +26,17 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Create QR code value (JSON string)
-    const qrData = JSON.stringify(formData);
+    // Create a clean readable format for QR code
+    const qrData = `
+Name: ${formData.name}
+Contact: ${formData.contactNumber}
+Email: ${formData.email}
+Website: ${formData.website}
+Facebook: ${formData.facebook}
+Instagram: ${formData.instagram}
+Twitter: ${formData.twitter}
+    `.trim();
+
     setQrValue(qrData);
   };
 
@@ -49,10 +58,7 @@ const Home = () => {
           {/* Left Side Form */}
           <div className="left-side">
             <h3>Enter Your Details</h3>
-            <form
-              onSubmit={handleSubmit}
-              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-            >
+            <form className="main-form" onSubmit={handleSubmit}>
               <input
                 type="text"
                 name="name"
@@ -105,17 +111,7 @@ const Home = () => {
                 value={formData.twitter}
                 onChange={handleChange}
               />
-              <button
-                type="submit"
-                style={{
-                  padding: "10px",
-                  background: "#007bff",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "5px",
-                  cursor: "pointer"
-                }}
-              >
+              <button className="btn" type="submit">
                 Generate QR Code
               </button>
             </form>
@@ -128,18 +124,7 @@ const Home = () => {
               <>
                 <QRCodeCanvas value={qrValue} size={200} includeMargin={true} />
                 <br />
-                <button
-                  onClick={downloadQR}
-                  style={{
-                    marginTop: "10px",
-                    padding: "10px",
-                    background: "green",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: "5px",
-                    cursor: "pointer"
-                  }}
-                >
+                <button className="btn" onClick={downloadQR}>
                   Download QR Code
                 </button>
               </>
