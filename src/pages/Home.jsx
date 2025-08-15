@@ -10,34 +10,59 @@ const Home = () => {
     website: "",
     facebook: "",
     instagram: "",
-    twitter: ""
+    twitter: "",
+    image: null
   });
 
   const [qrValue, setQrValue] = useState("");
   const qrRef = useRef();
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value, files } = e.target;
+    if (name === "image" && files.length > 0) {
+      setFormData({ ...formData, image: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
-  const handleSubmit = (e) => {
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create a clean readable format for QR code
-    const qrData = `
-Name: ${formData.name}
-Contact: ${formData.contactNumber}
-Email: ${formData.email}
-Website: ${formData.website}
-Facebook: ${formData.facebook}
-Instagram: ${formData.instagram}
-Twitter: ${formData.twitter}
-    `.trim();
+    let imageBase64 = "";
+    if (formData.image) {
+      imageBase64 = await toBase64(formData.image);
 
-    setQrValue(qrData);
+      // Limit size (~1MB for QR safety)
+      const sizeKB = Math.round((imageBase64.length * 3) / 4 / 1024);
+      if (sizeKB > 1000) {
+        alert("Image is too large! Please select an image under 1MB.");
+        setFormData({ ...formData, image: null });
+        return;
+      }
+    }
+
+    const profileData = {
+      ...formData,
+      image: imageBase64
+    };
+
+    // URL-safe Base64 encoding
+    const encoded = btoa(JSON.stringify(profileData))
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=+$/, "");
+
+    const profileUrl = `${window.location.origin}/profile?data=${encoded}`;
+    setQrValue(profileUrl);
   };
 
   const downloadQR = () => {
@@ -52,81 +77,33 @@ Twitter: ${formData.twitter}
   return (
     <div className="home-parent parent">
       <div className="home-container container">
-        <p>If you submit this form automatically generate a QR code</p>
+        <p>Fill out the form to generate a QR code for your profile</p>
 
         <div className="main-box">
           {/* Left Side Form */}
           <div className="left-side">
             <h3>Enter Your Details</h3>
             <form className="main-form" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="tel"
-                name="contactNumber"
-                placeholder="Contact Number"
-                value={formData.contactNumber}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="url"
-                name="website"
-                placeholder="Website Link"
-                value={formData.website}
-                onChange={handleChange}
-              />
-              <input
-                type="url"
-                name="facebook"
-                placeholder="Facebook Profile Link"
-                value={formData.facebook}
-                onChange={handleChange}
-              />
-              <input
-                type="url"
-                name="instagram"
-                placeholder="Instagram Profile Link"
-                value={formData.instagram}
-                onChange={handleChange}
-              />
-              <input
-                type="url"
-                name="twitter"
-                placeholder="Twitter Profile Link"
-                value={formData.twitter}
-                onChange={handleChange}
-              />
-              <button className="btn" type="submit">
-                Generate QR Code
-              </button>
+              <input type="text" name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} required />
+              <input type="tel" name="contactNumber" placeholder="Contact Number" value={formData.contactNumber} onChange={handleChange} required />
+              <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
+              <input type="url" name="website" placeholder="Website Link" value={formData.website} onChange={handleChange} />
+              <input type="url" name="facebook" placeholder="Facebook Profile Link" value={formData.facebook} onChange={handleChange} />
+              <input type="url" name="instagram" placeholder="Instagram Profile Link" value={formData.instagram} onChange={handleChange} />
+              <input type="url" name="twitter" placeholder="Twitter Profile Link" value={formData.twitter} onChange={handleChange} />
+              <input type="file" name="image" accept="image/*" onChange={handleChange} />
+              <button className="btn" type="submit">Generate QR Code</button>
             </form>
           </div>
 
           {/* Right Side QR Code Preview */}
           <div className="right-side" ref={qrRef}>
-            <h3>Preview and download option for your QR-Code</h3>
+            <h3>Preview and Download</h3>
             {qrValue ? (
               <>
                 <QRCodeCanvas value={qrValue} size={200} includeMargin={true} />
                 <br />
-                <button className="btn" onClick={downloadQR}>
-                  Download QR Code
-                </button>
+                <button className="btn" onClick={downloadQR}>Download QR Code</button>
               </>
             ) : (
               <p>No QR code generated yet.</p>

@@ -1,0 +1,88 @@
+import React from "react";
+
+const Profile = () => {
+  const params = new URLSearchParams(window.location.search);
+  const encodedData = params.get("data");
+
+  if (!encodedData) {
+    return <p>No profile data found.</p>;
+  }
+
+  let profile;
+  try {
+    const base64 = encodedData.replace(/-/g, "+").replace(/_/g, "/");
+    const paddedBase64 = base64 + "=".repeat((4 - (base64.length % 4)) % 4);
+    profile = JSON.parse(atob(paddedBase64));
+  } catch (error) {
+    console.error("Error decoding profile data:", error);
+    return <p>Invalid profile data.</p>;
+  }
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
+      <h1>{profile.name}</h1>
+      {profile.image && (
+        <img
+          src={profile.image}
+          alt="Profile"
+          style={{
+            width: "200px",
+            height: "200px",
+            objectFit: "cover",
+            borderRadius: "10px",
+            marginBottom: "15px",
+          }}
+        />
+      )}
+
+      <p>
+        <strong>Contact:</strong>{" "}
+        <a href={`tel:${profile.contactNumber}`} style={{ color: "blue" }}>
+          {profile.contactNumber}
+        </a>
+      </p>
+
+      <p>
+        <strong>Email:</strong>{" "}
+        <a href={`mailto:${profile.email}`} style={{ color: "blue" }}>
+          {profile.email}
+        </a>
+      </p>
+
+      {profile.website && (
+        <p>
+          <strong>Website:</strong>{" "}
+          <a href={profile.website} target="_blank" rel="noreferrer">
+            {profile.website}
+          </a>
+        </p>
+      )}
+      {profile.facebook && (
+        <p>
+          <strong>Facebook:</strong>{" "}
+          <a href={profile.facebook} target="_blank" rel="noreferrer">
+            {profile.facebook}
+          </a>
+        </p>
+      )}
+      {profile.instagram && (
+        <p>
+          <strong>Instagram:</strong>{" "}
+          <a href={profile.instagram} target="_blank" rel="noreferrer">
+            {profile.instagram}
+          </a>
+        </p>
+      )}
+      {profile.twitter && (
+        <p>
+          <strong>Twitter:</strong>{" "}
+          <a href={profile.twitter} target="_blank" rel="noreferrer">
+            {profile.twitter}
+          </a>
+        </p>
+      )}
+    </div>
+  );
+};
+
+export default Profile;
