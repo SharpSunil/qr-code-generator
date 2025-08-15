@@ -41,18 +41,14 @@ const Home = () => {
     if (formData.image) {
       imageBase64 = await toBase64(formData.image);
 
-      // Limit size (~1MB for QR safety)
-      const sizeKB = Math.round((imageBase64.length * 3) / 4 / 1024);
-      if (sizeKB > 1000) {
-        alert("Image is too large! Please select an image under 1MB.");
-        setFormData({ ...formData, image: null });
-        return;
-      }
+      // Save in localStorage (replace old image if any)
+      localStorage.setItem("profileImage", imageBase64);
     }
 
+    // Store all details except actual image in QR
     const profileData = {
       ...formData,
-      image: imageBase64
+      image: null // just a placeholder
     };
 
     // URL-safe Base64 encoding

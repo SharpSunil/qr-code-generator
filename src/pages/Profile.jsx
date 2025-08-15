@@ -13,6 +13,14 @@ const Profile = () => {
     const base64 = encodedData.replace(/-/g, "+").replace(/_/g, "/");
     const paddedBase64 = base64 + "=".repeat((4 - (base64.length % 4)) % 4);
     profile = JSON.parse(atob(paddedBase64));
+
+    // Retrieve image from localStorage if not present
+    if (!profile.image) {
+      const storedImage = localStorage.getItem("profileImage");
+      if (storedImage) {
+        profile.image = storedImage;
+      }
+    }
   } catch (error) {
     console.error("Error decoding profile data:", error);
     return <p>Invalid profile data.</p>;
@@ -34,53 +42,12 @@ const Profile = () => {
           }}
         />
       )}
-
-      <p>
-        <strong>Contact:</strong>{" "}
-        <a href={`tel:${profile.contactNumber}`} style={{ color: "blue" }}>
-          {profile.contactNumber}
-        </a>
-      </p>
-
-      <p>
-        <strong>Email:</strong>{" "}
-        <a href={`mailto:${profile.email}`} style={{ color: "blue" }}>
-          {profile.email}
-        </a>
-      </p>
-
-      {profile.website && (
-        <p>
-          <strong>Website:</strong>{" "}
-          <a href={profile.website} target="_blank" rel="noreferrer">
-            {profile.website}
-          </a>
-        </p>
-      )}
-      {profile.facebook && (
-        <p>
-          <strong>Facebook:</strong>{" "}
-          <a href={profile.facebook} target="_blank" rel="noreferrer">
-            {profile.facebook}
-          </a>
-        </p>
-      )}
-      {profile.instagram && (
-        <p>
-          <strong>Instagram:</strong>{" "}
-          <a href={profile.instagram} target="_blank" rel="noreferrer">
-            {profile.instagram}
-          </a>
-        </p>
-      )}
-      {profile.twitter && (
-        <p>
-          <strong>Twitter:</strong>{" "}
-          <a href={profile.twitter} target="_blank" rel="noreferrer">
-            {profile.twitter}
-          </a>
-        </p>
-      )}
+      <p><strong>Contact:</strong> <a href={`tel:${profile.contactNumber}`}>{profile.contactNumber}</a></p>
+      <p><strong>Email:</strong> <a href={`mailto:${profile.email}`}>{profile.email}</a></p>
+      {profile.website && <p><strong>Website:</strong> <a href={profile.website} target="_blank" rel="noreferrer">{profile.website}</a></p>}
+      {profile.facebook && <p><strong>Facebook:</strong> <a href={profile.facebook} target="_blank" rel="noreferrer">{profile.facebook}</a></p>}
+      {profile.instagram && <p><strong>Instagram:</strong> <a href={profile.instagram} target="_blank" rel="noreferrer">{profile.instagram}</a></p>}
+      {profile.twitter && <p><strong>Twitter:</strong> <a href={profile.twitter} target="_blank" rel="noreferrer">{profile.twitter}</a></p>}
     </div>
   );
 };
