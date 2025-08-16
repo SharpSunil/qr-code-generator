@@ -11,45 +11,21 @@ const Home = () => {
     facebook: "",
     instagram: "",
     twitter: "",
-    image: null,
   });
 
   const [qrValue, setQrValue] = useState("");
   const qrRef = useRef();
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "image" && files.length > 0) {
-      setFormData({ ...formData, image: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const toBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    let imageBase64 = "";
-    if (formData.image) {
-      imageBase64 = await toBase64(formData.image);
-
-      // Save in localStorage (replace old image if any)
-      localStorage.setItem("profileImage", imageBase64);
-    }
-
-    // Store all details except actual image in QR
-    const profileData = {
-      ...formData,
-      image: null, // just a placeholder
-    };
+    // Store all form details
+    const profileData = { ...formData };
 
     // URL-safe Base64 encoding
     const encoded = btoa(JSON.stringify(profileData))
@@ -130,12 +106,6 @@ const Home = () => {
                 name="twitter"
                 placeholder="Twitter Profile Link"
                 value={formData.twitter}
-                onChange={handleChange}
-              />
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
                 onChange={handleChange}
               />
               <button className="btn" type="submit">
