@@ -24,8 +24,7 @@
 body {
   width: 100%;
   overflow-x: hidden;
-  background:rgba(102, 231, 235, 0.088);
- 
+  background: rgba(102, 231, 235, 0.088);
 }
 
 html {
@@ -68,7 +67,7 @@ p {
 }
 
 .parent {
-  width: 100vw;
+  width: 100%;
 
   .container {
     max-width: var(--max-width);
