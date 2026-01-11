@@ -19,7 +19,7 @@ const Header = () => {
           </div>
          {open && (
 
-           <div className="mobile-menu">
+           <div className="mobile-menu" onClick={() => setOpen(false)}>
             <p>Home</p>
             <p>About</p>
             <p>Services</p>
