@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./header.scss"
 import logo from "../../assets/logo.png"
 import { CiMenuFries } from "react-icons/ci";
+import { Link } from 'react-router-dom';
 const Header = () => {
   const [open, setOpen] = useState(false);
 
@@ -12,18 +13,18 @@ const Header = () => {
         <div className="header-cont container">
           <div className="logo"><img src={logo} /></div>
           <div className="menu">
-            <p>Home</p>
-            <p>About</p>
-            <p>Services</p>
-            <p>Contact</p>
+            <Link to="">Home</Link>
+            <Link to="/url_qr">URL To QR Code</Link>
+            <Link to="">Services</Link>
+            <Link to="">Contact</Link>
           </div>
          {open && (
 
            <div className="mobile-menu" onClick={() => setOpen(false)}>
-            <p>Home</p>
-            <p>About</p>
-            <p>Services</p>
-            <p>Contact</p>
+            <Link to="">Home</Link>
+            <Link to="/url_qr">URL To QR Code</Link>
+            <Link to="">Services</Link>
+            <Link to="">Contact</Link>
           </div>
          )}
           <div className="toggle" onClick={() => setOpen(!open)}>

@@ -6,12 +6,14 @@ import "./App.scss";
 import Home1 from "./pages/Home1";
 import Header from "./componants/Header/Header";
 import Footer from "./componants/Footer/Footer";
+import Url_qr from "./pages/URL-qr/Url_qr";
 function App() {
   return (
     <Router>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/url_qr" element={<Url_qr />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/home1" element={<Home1 /> } />
       </Routes>

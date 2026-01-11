@@ -14,7 +14,7 @@
       display: flex;
       gap: 20px;
       cursor: pointer;
-      p {
+      a {
         transition: var(--trans);
         &:hover {
           color: var(--white);
@@ -54,7 +54,7 @@
         height: 100%;
         z-index: 999;
         justify-content: center;
-        p {
+        a {
           font-size: 38px;
           border-bottom: 1px solid var(--white);
           padding-bottom: 5px;
