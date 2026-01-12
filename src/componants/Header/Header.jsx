@@ -14,12 +14,11 @@ const Header = () => {
           <div className="logo"><img src={logo} /></div>
           <div className="menu">
             <Link to="">Home</Link>
-            <Link to="/url_qr">URL To QR Code</Link>
+            <Link to="/url_qr">URL-To-QR-Code</Link>
             <Link to="">Services</Link>
             <Link to="">Contact</Link>
           </div>
          {open && (
-
            <div className="mobile-menu" onClick={() => setOpen(false)}>
             <Link to="">Home</Link>
             <Link to="/url_qr">URL To QR Code</Link>
