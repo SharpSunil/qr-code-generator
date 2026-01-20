@@ -1,5 +1,6 @@
 import React from 'react'
 import { FcGoogle } from "react-icons/fc";
+import { CiMail } from "react-icons/ci";
 import './login.scss'
 const Login = () => {
   return (
@@ -11,8 +12,11 @@ const Login = () => {
                 <div className="google-login-input">
                     <div className="icon"><FcGoogle /><span>Sign in with Google</span></div>
                 </div>
-                Or, login with your email
+                <div className="main-line">
+                    Or, login with your email
+                    </div>
                 <div className="email-input">
+                    <span><CiMail /></span>
                     <input type="email" placeholder='Enter you email here' />
                 </div>
                 <div className="btn">Log in</div>
