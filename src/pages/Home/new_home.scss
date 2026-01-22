@@ -1,0 +1,104 @@
+.new-home-parent {
+  .new-home-cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 10px;
+    flex-direction: column;
+    gap: 10px;
+    h2 {
+      span {
+        color: var(--black);
+      }
+    }
+    .main-home-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      .left-box {
+        width: 70%;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        gap: 20px;
+        display: flex;
+        flex-direction: column;
+
+        //----------------First Box----------------//
+        .first-box {
+          display: flex;
+          align-items: center;
+
+          gap: 20px;
+          .left-icon {
+            svg {
+              fill: var(--accent);
+              font-size: 40px;
+            }
+          }
+          .right-input {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 80%;
+            label {
+              font-size: 16px;
+              text-align: left;
+              font-weight: 500;
+            }
+            .input-filed {
+              display: flex;
+              align-items: center;
+              width: 100%;
+              gap: 10px;
+              input {
+                width: 60%;
+                padding: 10px 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+              }
+              .btn {
+                width: 40%;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+            }
+            .sample {
+              font-size: 14px;
+            }
+          }
+        }
+        //-------------------Second Box------------------//
+        .second-box {
+          width: 100%;
+          height: 1px;
+          background: #ccc;
+          position: relative;
+
+          .qr-type {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #ccc;
+            padding: 5px 20px;
+            background: white;
+            border-radius: 50px;
+          }
+        }
+      }
+      .right-box {
+        width: 30%;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 10px;
+      }
+    }
+  }
+}
