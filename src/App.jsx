@@ -8,12 +8,14 @@ import Header from "./componants/Header/Header";
 import Footer from "./componants/Footer/Footer";
 import Url_qr from "./pages/URL-qr/Url_qr";
 import Login from "./pages/Login/Login";
+import SignUP from "./pages/SignUp/SignUP";
 function App() {
   return (
     <Router>
       <Header />
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUP /> } />
         <Route path="/home" element={<Home />} />
         <Route path="/url_qr" element={<Url_qr />} />
         <Route path="/profile" element={<Profile />} />

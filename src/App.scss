@@ -24,7 +24,8 @@
 body {
   width: 100%;
   overflow-x: hidden;
-  background: rgba(102, 231, 235, 0.088);
+  // background: rgba(102, 231, 235, 0.088);
+  background: radial-gradient(circle at center, #caf4f7 0%, #ffffff 100%);
 }
 
 html {
@@ -94,3 +95,5 @@ p {
     color: var(--accent) !important;
   }
 }
+
+

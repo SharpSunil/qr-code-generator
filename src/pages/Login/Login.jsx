@@ -2,6 +2,7 @@ import React from 'react'
 import { FcGoogle } from "react-icons/fc";
 import { CiMail } from "react-icons/ci";
 import './login.scss'
+import { Link } from 'react-router-dom';
 const Login = () => {
   return (
     <>
@@ -21,7 +22,7 @@ const Login = () => {
                 </div>
                 <div className="btn">Log in</div>
 
-                <p>Don't have an account? <a href="/signup">Sign up</a></p>
+                <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
             </div>
         </div>
       </div>

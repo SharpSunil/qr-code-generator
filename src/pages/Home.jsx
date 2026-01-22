@@ -1,5 +1,8 @@
 import React, { useState, useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 import "./Home.scss";
 
 const Home = () => {
@@ -129,6 +132,38 @@ const Home = () => {
               <p>No QR code generated yet.</p>
             )}
           </div>
+        </div>
+
+        {/* Swiper Carousel with Autoplay */}
+        <div className="swiper-section">
+          <h3>Featured QR Codes</h3>
+          <Swiper
+            modules={[Autoplay]}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            spaceBetween={20}
+            slidesPerView={1}
+            breakpoints={{
+              640: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+          >
+            <SwiperSlide>
+              <div className="slide-content">Slide 1</div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="slide-content">Slide 2</div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="slide-content">Slide 3</div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="slide-content">Slide 4</div>
+            </SwiperSlide>
+          </Swiper>
         </div>
       </div>
     </div>
